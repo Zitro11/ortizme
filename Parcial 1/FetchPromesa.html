@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="Boton">Abrir Imagen</button>
+    <div id="DivFact">
+        <h1 id="Fact">Hola</h1>
+    </div>
+    
+    <img id="Imagen" >//Aqui es donde se va mostrar la imageen 
+    <script>
+        document.getElementById('Boton').addEventListener('click',function(){//aqui escuchamos el boton de abrir imagen
+            HacerPeticion();
+        });
+        function HacerPeticion() {
+            //Aqui se pone la linea de la api
+            fetch("https://api.waifu.pics/sfw/waifu")
+        .then( respuesta => respuesta.json()) //aqui recibe el JSON
+        .then( datos => document.getElementById('Imagen').src =datos.url) //aqui usamos el getelemetById para cambiarle la propiedad SCR a la IMG
+        }
+            
+        
+        
+        
+    </script>
+</body>
+</html>
