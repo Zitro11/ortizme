@@ -13,14 +13,13 @@
         <h1 id="Fact">Prueba api</h1>
     </div>
     
-    <img id="Imagen" >//Aqui es donde se va mostrar la imageen 
+    <img id="Imagen" > 
     <script>
         document.getElementById('Boton').addEventListener('click',function(){HacerPeticion();});
         function HacerPeticion() {
-            //Aqui se pone la linea de la api
             fetch("https://api.waifu.pics/sfw/waifu")
-        .then( respuesta => respuesta.json()) //aqui recibe el JSON
-        .then( datos => document.getElementById('Imagen').src =datos.url) //aqui usamos el getelemetById para cambiarle la propiedad SCR a la IMG
+        .then( respuesta => respuesta.json()) 
+        .then( datos => document.getElementById('Imagen').src =datos.url) 
         }
             
         
