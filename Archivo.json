@@ -1,0 +1,10 @@
+{
+    "Estudiante":
+    {
+        "10":{"Nombre": "Luis", "NControl": "19100156"},
+        "20":{"Nombre": "Rafael", "NControl": "19100223"},
+        "30":{"Nombre": "Francisco", "NControl": "19100230"},
+        "40":{"Nombre": "Rene", "NControl": "19100111"},
+        "50":{"Nombre": "Carlos", "NControl": "19100222"}
+    }
+}
