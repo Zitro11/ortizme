@@ -3,15 +3,14 @@ const cors = require('cors')
 
 const app = express()
 
-app.use(cors({origin:"http://localhost"}))
+app.use(cors({origin:'http://127.0.0.1:5500'}))
 
-const express = require('express')
 app.get('/',(req, res)=>{
-    res.send("Servidor express contestando a puerto 8082")
+    res.send("Servidor express contestando a puerto 8081")
 })
 
 app.post('/',(req, res)=>{
-    res.send("Servidor express contestando a puerto 8082")
+    res.send("Servidor express contestando a puerto 8081")
 })
 
-app.listen(8082)
+app.listen(8081,()=>{console.log('Server funcional')})

@@ -10,13 +10,13 @@
     
     <button id="button"> Fetch </button>
     <script>
-        document.getElementById('boton').addEventListener('click', function(){
+        document.getElementById('button').addEventListener('click', function(){
             hacerpeticion();
         });
 
     function hacerpeticion()
     {
-        fetch("http://localhost:8082")
+        fetch("http://localhost:8081")
         .then(respuesta => respuesta.text())
         .then(datos => console.log(datos))
     }
