@@ -15,5 +15,8 @@ app.get('/',(req, res)=>{
    res.sendFile('.server/.static/index.html',{root:__dirname})
 })
 
+app.use((req, res)=>{
+   res.sendFile('.server/.static/NotFound.html',{root:__dirname})
+})
 
 
