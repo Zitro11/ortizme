@@ -6,7 +6,20 @@ app.use(express.json())
 
 app.use(cors({origin:'http://127.0.0.1:5500'}))
 
+app.use((req,res, next) => {
+console.log('primera funcion midelware')
+next()
+},
+(req,res, next) => {
+   console.log('segunda funcion midelware')
+   next()
+})
 
+//instalar el midelware morgan en npm
+//npm insrall morgan
+//declararlo hasta arriba
+//copear codigo
+//hacer un request
 
 app.post('/texto',(req,res)=>{
    console.log(req.body)
@@ -42,7 +55,7 @@ app.get('suma', (req,res) => {
 
 
 app.get('/',(req, res)=>{
-    res.send("Servidor express contestando a puerto 8081")
+    res.send("Servidor express contestando a puerto 8083")
  })
 
 app.listen(8083,()=>{console.log('Server funcional')})
