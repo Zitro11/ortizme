@@ -15,11 +15,6 @@ next()
    next()
 })
 
-//instalar el midelware morgan en npm
-//npm insrall morgan
-//declararlo hasta arriba
-//copear codigo
-//hacer un request
 
 app.post('/texto',(req,res)=>{
    console.log(req.body)
@@ -62,11 +57,11 @@ app.listen(8083,()=>{console.log('Server funcional')})
 
 app.get('/',(req, res)=>{
    // res.send("Servidor express contestando a puerto 8081")
-   res.sendFile('/static/index.html',{root:__dirname})
+   res.sendFile('/index.html',{root:__dirname})
 })
 
 app.use((req, res)=>{
-   res.sendFile('/static/NotFound.html',{root:__dirname})
+   res.sendFile('/NotFound.html',{root:__dirname})
 })
 
 
