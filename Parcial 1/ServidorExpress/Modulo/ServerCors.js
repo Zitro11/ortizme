@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const cadena = require('./cadena')
 app.use(express.text())
 app.use(express.json())
 
@@ -15,6 +16,19 @@ next()
    next()
 })
 
+//26/09/2022
+
+app.post('/texto', (req, res)=>
+{
+   console.log(req.body)
+   let may = cadena.pasarMayusculas(req.body);
+   let sinesp = cadena.quitarEspacios(req.body);
+   let longi = cadena.obtenerLongitud(req.body);
+   res.json({mayusculas:may,
+            sinespacios:sinesp,
+            longitud:longi})
+}
+)
 
 app.post('/texto',(req,res)=>{
    console.log(req.body)
@@ -55,13 +69,5 @@ app.get('/',(req, res)=>{
 
 app.listen(8083,()=>{console.log('Server funcional')})
 
-app.get('/',(req, res)=>{
-   // res.send("Servidor express contestando a puerto 8081")
-   res.sendFile('/index.html',{root:__dirname})
-})
-
-app.use((req, res)=>{
-   res.sendFile('/NotFound.html',{root:__dirname})
-})
 
 
