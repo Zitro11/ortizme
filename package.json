@@ -3,5 +3,23 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "morgan": "^1.10.0"
-  }
+  },
+  "name": "ortizme",
+  "description": "Paquete",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zitro11/ortizme.git"
+  },
+  "author": "Pancho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zitro11/ortizme/issues"
+  },
+  "homepage": "https://github.com/Zitro11/ortizme#readme"
 }
