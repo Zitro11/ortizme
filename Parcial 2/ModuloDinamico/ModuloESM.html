@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo ESM</title>
+</head>
+<body>
+    
+    <label for="cadena">Cadena</label>
+    <input id="cadena" type="text">
+    <button id="btn">Mayusculas</button>
+    <button id="btn2">Sin espacios</button>
+    
+    <label for="resultado">resultado</label>
+    <input id="resultado" type="text">
+    
+
+
+
+<script type="module">
+
+   // import * as funciones from './ModuloBalin.js'
+
+
+    document.getElementById("btn").addEventListener("click",function(){
+
+        import('./ModuloBalin.js')
+        .then(function(modulo){ 
+ 
+        let cadMay = modulo.pasarMayusculas(document.getElementById("cadena").value);
+        document.getElementById("resultado").value=cadMay
+
+        })
+    })
+
+    document.getElementById("btn2").addEventListener("click",function(){
+
+        import('./ModuloBalin.js')
+        .then(function(modulo){
+
+        let cadSin = modulo.quitarEspacios(document.getElementById("cadena").value);
+        document.getElementById("resultado").value=cadSin
+
+        })
+})
+    
+    
+</script>
+
+</body>
+</html>
