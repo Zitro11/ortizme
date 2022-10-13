@@ -1,12 +1,29 @@
-const sql = require('mssql')
+var j2x = require ('json2xls')
+var fs = require ('fs')
+var mysql = require('mysql')
 
-async () => {
-    try {
-        // make sure that any items are correctly URL encoded in the connection string
-        await sql.connect('Server=localhost,1433;Database=API;User Id=DESKTOP-LCQ2MB3\israe;Password=;Encrypt=true')
-        const result = await sql.query`select * from Amigos`
-        console.log(result)
-    } catch (err) {
-        // ... error checks
-    }
-}
+const { json, response } = require('express');
+
+var con = mysql.createConnection({
+    host : "localhost",
+    user: "root",
+    password : "",
+    database: "api"
+});
+
+con.connect(function(err){
+    if(err) throw err;
+    console.log("conected!");
+
+    miQuery = 'SELECT * FROM amigos'
+
+    con.query(miQuery, function (err, response){
+        console.log(response)
+        if(err) throw err;
+        fs.writeFileSync(`${__dirname}/excel/dat.xlsx`, j2x(response), 'binary')
+        con.end()
+    })
+})
+
+
+
