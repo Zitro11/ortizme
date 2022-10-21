@@ -1,98 +1,63 @@
-const express = require('express')
-const cors = require('cors')
+const { response } = require("express");
+const xp = require("express")
+const sql = require("mysql2")
 
-const app = express() 
-
-var j2x = require ('json2xls')
-var fs = require ('fs')
-var mysql = require('mysql')
-
-const { json, response } = require('express');
-
-var con = mysql.createConnection({
-    host : "localhost",
+var pool = sql.createPool({
+    host: "localhost",
+    database: "api",
     user: "root",
-    password : "",
-    database: "api"
-});
+    password: ""
+  });
 
-app.use(cors({origin:'http://127.0.0.1:5500'}))
+const app = xp()
 
-app.use(express.json())
-app.use(express.text())
+app.use(xp.json())
+app.use(xp.text())
 
-//get
-app.get('/',(req, res)=>{
-    con.connect(function(err){
-        if(err) throw err;
-        console.log("conected!");
-    
-        miQuery = 'SELECT * FROM amigos WHERE numero ='+req.body
-    
-        con.query(miQuery, function (err, response){
-            console.log(response)
-            res.send(response)
-            con.end()
+app.get('/',function(req,res) {
+    console.log(req.body)
+    if(req.body.Numero == undefined)
+    {
+        pool.query('SELECT * FROM amigos',function(err,response,fields){
+            res.send(JSON.stringify(response))
         })
+    }
+    else{
+        pool.query('SELECT * FROM amigos WHERE Numero =' + req.body.Numero, function(err,response,fields){
+            res.send(JSON.stringify(response))
+        })
+    }
+})
+
+app.post('/',function(req,res){
+    console.log(req.body)
+    let Nombre = req.body.Nombre
+    let Apodo = req.body.Apodo
+    let Numero = req.body.Numero
+    pool.query(`INSERT INTO amigos(Numero,Nombre,Apodo) VALUES('${Numero}','${Nombre}','${Apodo}')`,function(err,response,fields){
+        res.send("Se registraron los datos")
     })
 })
 
-//post
-
-app.post('/',(req, res)=>{
-    con.connect(function(err){
-        if(err) throw err;
-        console.log("conected!");
-        let Nombre = req.body.Nombre
-        let Numero = req.body.Numero
-        let Apodo = req.body.Apodo
-        miQuery = (`INSERT INTO amigos (Numero, Nombre, Apodo) VALUES ('${Numero}', '${Nombre}', '${Apodo}')`)
-        con.query(miQuery, function (err, response){
-            console.log(response)
-            res.send(response)
-            con.end()
-        })
+app.delete('/',function(req,res){
+    let Numero = req.body.Numero 
+    pool.query(`DELETE FROM amigos WHERE Numero = '${Numero}'`,function(err,response,fields){
+        res.send(`El registro numero: ${Numero} se a eliminado`)
     })
-    res.send("Se agrego el registro")
 })
 
-//Delete
-
-app.delete('/',(req, res)=>{
-    con.connect(function(err){
-        if(err) throw err;
-        console.log("conected!");
-        let Nombre = req.body.Nombre
-        let Numero = req.body.Numero
-        let Apodo = req.body.Apodo
-        miQuery = (`DELETE FROM amigos WHERE Numero = '${Numero}'`)
-        con.query(miQuery, function (err, response){
-            console.log(response)
-            res.send(response)
-            con.end()
-        })
+app.patch('/',function(req,res){
+    let Numero = req.body.Numero
+    Nombre = req.body.Nombre
+    Apodo = req.body.Apodo
+    pool.query(`SELECT * FROM amigos WHERE Numero = '${req.body.Numero}'`,function(err,response,fields){
+        Nombre = response.Nombre
+        Apodo = response.Apodo
     })
-    res.send("Se elimino el registro")
+
+    pool.query(`UPDATE amigos SET Nombre='${Nombre}',Apodo='${Apodo}' WHERE Numero = '${Numero}'`,function(err,response,fields){
+        res.send(`El usuario con el numero ${Numero} se a actualizado`)
+    })
 })
 
-//Put patch
-
-app.patch('/',(req, res)=>{
-    con.connect(function(err){
-        if(err) throw err;
-        console.log("conected!");
-        let Nombre = req.body.Nombre
-        let Numero = req.body.Numero
-        let Apodo = req.body.Apodo
-        miQuery = (`UPDATE amigos SET Nombre = '${Nombre}', Apodo = '${Apodo}' WHERE Numero = '${Numero}'`)
-        con.query(miQuery, function (err, response){
-            console.log(response)
-            res.send(response)
-            con.end()
-        })
-    })
-    res.send("Se actualizo el registro")
-})
-
-
-app.listen(8089,()=>{console.log('Server funcional')})
+app.listen(1234,()=>{console.log('Server funcional')})
