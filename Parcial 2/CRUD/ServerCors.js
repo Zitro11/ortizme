@@ -43,22 +43,56 @@ app.post('/',(req, res)=>{
     con.connect(function(err){
         if(err) throw err;
         console.log("conected!");
-    
-        miQuery = (`INSERT INTO amigos (Numero, Nombre, Apodo) VALUES ('${Numero}'), ('${Nombre}'), ('${Apodo}')`)
+        let Nombre = req.body.Nombre
+        let Numero = req.body.Numero
+        let Apodo = req.body.Apodo
+        miQuery = (`INSERT INTO amigos (Numero, Nombre, Apodo) VALUES ('${Numero}', '${Nombre}', '${Apodo}')`)
         con.query(miQuery, function (err, response){
             console.log(response)
             res.send(response)
             con.end()
         })
     })
+    res.send("Se agrego el registro")
 })
 
 //Delete
 
-
+app.delete('/',(req, res)=>{
+    con.connect(function(err){
+        if(err) throw err;
+        console.log("conected!");
+        let Nombre = req.body.Nombre
+        let Numero = req.body.Numero
+        let Apodo = req.body.Apodo
+        miQuery = (`DELETE FROM amigos WHERE Numero = '${Numero}'`)
+        con.query(miQuery, function (err, response){
+            console.log(response)
+            res.send(response)
+            con.end()
+        })
+    })
+    res.send("Se elimino el registro")
+})
 
 //Put patch
 
+app.patch('/',(req, res)=>{
+    con.connect(function(err){
+        if(err) throw err;
+        console.log("conected!");
+        let Nombre = req.body.Nombre
+        let Numero = req.body.Numero
+        let Apodo = req.body.Apodo
+        miQuery = (`UPDATE amigos SET Nombre = '${Nombre}', Apodo = '${Apodo}' WHERE Numero = '${Numero}'`)
+        con.query(miQuery, function (err, response){
+            console.log(response)
+            res.send(response)
+            con.end()
+        })
+    })
+    res.send("Se actualizo el registro")
+})
 
 
-app.listen(8081,()=>{console.log('Server funcional')})
+app.listen(8089,()=>{console.log('Server funcional')})
