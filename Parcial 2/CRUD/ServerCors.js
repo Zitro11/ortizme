@@ -1,6 +1,7 @@
 const { response } = require("express");
 const xp = require("express")
 const sql = require("mysql2")
+const cors = require("cors")
 
 var pool = sql.createPool({
     host: "localhost",
@@ -11,6 +12,7 @@ var pool = sql.createPool({
 
 const app = xp()
 
+app.use(cors({origin:'*'}))
 app.use(xp.json())
 app.use(xp.text())
 

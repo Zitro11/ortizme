@@ -18,8 +18,8 @@
         document.getElementById('Boton').addEventListener('click',function(){HacerPeticion();});
         function HacerPeticion() {
             fetch("https://api.waifu.pics/sfw/waifu")
-        .then( respuesta => respuesta.json()) 
-        .then( datos => document.getElementById('Imagen').src =datos.url) 
+            .then( respuesta => respuesta.json()) 
+            .then( datos => document.getElementById('Imagen').src = datos.url) 
         }
             
         
