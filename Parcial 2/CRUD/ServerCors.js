@@ -10,6 +10,7 @@ var pool = sql.createPool({
     password: ""
   });
 
+  
 const app = xp()
 
 app.use(cors({origin:'*'}))
