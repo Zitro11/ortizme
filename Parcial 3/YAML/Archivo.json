@@ -1,16 +1,27 @@
 {
-    "name": "balin",
-    "version": "1.0.0",
-    "description": "subirpaquete",
-    "main": "ModuloBalin.js",
-    "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "francisco",
-    "license": "ISC",
-    "dependencies": {
-      "mysql2": "^2.3.3"
-    }
+  "alumno" : 
+  {
+    "nombre" : "Francisco",
+    "edad" : 21,
+    "cursos" : 
+    [
+      {"nombre" : "Curso1"},
+      {"nombre" : "Curso2"}
+    ],
+    "autos":
+    ["Ford", "BMW", "Fiat"]
+  },
 
-    
+  "Escuela" : 
+  {
+    "nombre" : "Tec",
+    "lugar" : "Nuevo Laredo",
+    "carreras" : 
+    [
+      {"nombre" : "Carrera1"},
+      {"nombre" : "Carrera2"}
+    ],
+    "aulas":
+    ["H1", "H2", "H3"]
   }
+}
