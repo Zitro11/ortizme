@@ -1,7 +1,28 @@
-const { response } = require("express");
-const xp = require("express")
-const sql = require("mysql2")
-const cors = require("cors")
+const express = require('express');
+const sql = require('mysql2')
+const cors = require('cors')
+const app = express()
+var router = express.Router()
+
+app.use(cors({origin:'*'}))
+app.use(express.json())
+app.use(express.text())
+
+/**
+ * @swagger
+ * /amigo:
+ *  get:
+ *      description: WELCOME
+ *      responses:
+ *          200:
+ *              description: Returns a mysterious string.
+ */ 
+router.get('/',async (req, res) => {
+
+});
+
+
+
 
 var pool = sql.createPool({
     host: "localhost",
@@ -10,14 +31,10 @@ var pool = sql.createPool({
     password: ""
   });
 
-  
-const app = xp()
 
-app.use(cors({origin:'*'}))
-app.use(xp.json())
-app.use(xp.text())
 
-app.get('/',function(req,res) {
+
+router.get('/',function(req,res) {
     console.log(req.body)
     if(req.body.Numero == undefined)
     {
@@ -32,7 +49,7 @@ app.get('/',function(req,res) {
     }
 })
 
-app.post('/',function(req,res){
+.post('/',function(req,res){
     console.log(req.body)
     let Nombre = req.body.Nombre
     let Apodo = req.body.Apodo
@@ -42,14 +59,14 @@ app.post('/',function(req,res){
     })
 })
 
-app.delete('/',function(req,res){
+.delete('/',function(req,res){
     let Numero = req.body.Numero 
     pool.query(`DELETE FROM amigos WHERE Numero = '${Numero}'`,function(err,response,fields){
         res.send(`El registro numero: ${Numero} se a eliminado`)
     })
 })
 
-app.patch('/',function(req,res){
+.patch('/',function(req,res){
     let Numero = req.body.Numero
     Nombre = req.body.Nombre
     Apodo = req.body.Apodo
@@ -63,4 +80,5 @@ app.patch('/',function(req,res){
     })
 })
 
-app.listen(1235,()=>{console.log('Server funcional')})
+//app.listen(1235,()=>{console.log('Server funcional')})
+module.exports.router=router
