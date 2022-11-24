@@ -29,5 +29,10 @@
   "bugs": {
     "url": "https://github.com/Zitro11/ortizme/issues"
   },
-  "homepage": "https://github.com/Zitro11/ortizme#readme"
+  "homepage": "https://github.com/Zitro11/ortizme#readme",
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.1.0"
+  }
 }
